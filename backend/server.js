@@ -1,6 +1,17 @@
 // Start the server from here       
-const express = require('express')
-app = express();
 
-// export the app
-module.exports = app;
+app = require("./src/app");
+
+const connectDB =  require("./src/db/db");
+
+connectDB();
+
+// lets create a route
+app.get("/",(req,res)=>{
+    res.send("Hello world!")
+})
+
+// start the server
+app.listen(3000,()=>{
+    console.log("server is running")
+})

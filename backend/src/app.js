@@ -1,14 +1,7 @@
 // we wil create servers in this file
 
-// get the app from the server we can give any name here
-const app = require("./src/app");
+const express = require("express");
 
-// lets create a route
-app.get("/",(res,req)=>{
-    res.send("Hello world!")
-})
+const app=express();
 
-// start the server
-app.listen(3000,()=>{
-    console.log("server is running")
-})
+module.exports = app;
