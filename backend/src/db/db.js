@@ -4,8 +4,8 @@ const mongoose = require("mongoose")
 
 
 // connecting to database code but we will start it from server.js
-function  connectDB(){
-    mongoose.connect("mongodb://localhost:27017/food-view")
+function connectDB(){
+    mongoose.connect(process.env.MONGODB_URI)
     .then(()=>{
         console.log("MonogDb is connected!");
     })

@@ -1,7 +1,7 @@
 // Start the server from here       
+require('dotenv').config(); // to access env variables
 
 app = require("./src/app");
-
 const connectDB =  require("./src/db/db");
 
 connectDB();

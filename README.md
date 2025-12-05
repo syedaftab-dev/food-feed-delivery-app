@@ -10,6 +10,7 @@ Backend folder
     4. npx nodemon server.js   ----  to run the server also updates modified changes in the server by restrating it automatically
     5. npm i bcryptjs  --- to hash passwords
     6. npm i jsonwebtoken cookie-parser  --- to create token for user and cookie-parser if the already register user logins back
+    7. npm i dotenv  -- to use process.env.variable_name 
 
 - Step 2-
     Connecting to Database-MongoDB
