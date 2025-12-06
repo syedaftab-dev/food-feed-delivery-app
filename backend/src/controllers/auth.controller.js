@@ -2,7 +2,9 @@
 const userModel = require("../models/user.model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const foodPartnerModel = require("../models/foodpartner.model")
 
+//************USER KA CODE****************/
 // registering a new user
 async function registerUser(req,res){
     
@@ -98,8 +100,103 @@ async function logoutUser(req,res){
     res.status(200).json({
         message: "user logged out successfully"
     })
+    
 
 }
+
+// *********FOOD PARTNER KA AUTH CODE******************
+
+// Register a new food partner 
+async function registerFoodPartner(req,res){
+    const {name,email,password} = req.body;
+
+    // check if it already exist
+    const isFoodPartnerAlreadyExists = await foodPartnerModel.findOne({
+        email
+    })
+
+    // if exist
+    if(isFoodPartnerAlreadyExists){
+        res.status(400).json({
+             message: "Food partner already exists"
+        })
+    }
+    
+    // if not exist do hashing password
+    const hashedPassword = await bcrypt.hash(password,10);
+    // create and save the new food partner to the database
+    const foodPartner = await foodPartnerModel.create({
+        name,
+        email,
+        password: hashedPassword
+    });
+
+    // generate token for new food partner
+    const token = jwt.sign({
+        id: foodPartner._id
+    },process.env.JWT_SECRET)
+
+    // save token in cookie
+    res.cookie("token",token)
+
+    // new resource generated code status
+    res.status(201).json({
+        message: "Food partner registered successfully",
+        foodPartner: {
+            _id: foodPartner._id,
+            name: foodPartner.name,
+            email: foodPartner.email
+        }
+    })
+}
+
+// Food PArtner login code
+async function loginFoodPartner(req,res){
+    const {email,password} = req.body;
+    // find the email in DB
+    const foodPartner = await foodPartnerModel.findOne({
+        email
+    })
+    // if not exist
+    if(!foodPartner){
+        res.status(400).json({
+            message: "Invalid email or password"
+        })
+    }
+    // if email exist check for password from DB
+    // compare password
+    const isPasswordValid = await bcrypt.compare(password,foodPartner.password)
+
+    // if password is not matched
+    if(!isPasswordValid){
+        res.status(400).json({
+            message: "Invalid email or password"
+        })
+    }
+    // if password is correct
+    // generate token
+    const token = jwt.sign({
+        id: foodPartner._id,
+    },process.env.JWT_SECRET)
+
+    res.cookie("token",token);
+    res.status(200).json({
+        message: "Food partner logged in successfully",
+        foodPartner:{
+            _id: foodPartner._id,
+            name: foodPartner.name,
+            email: foodPartner.email
+        }
+    })
+}
+
+function logoutFoodPartner(req,res){
+    res.clearCookie("token");
+    res.status(200).json({
+        message: "Food partner logged out successfully"
+    })
+}
+
 // if we have more controllers/function we cant just send it like below it will consider the last one only
 // modules.export = registerUser
 // module.exports = loginUser
@@ -109,5 +206,8 @@ async function logoutUser(req,res){
 module.exports = {
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    registerFoodPartner,
+    loginFoodPartner,
+    logoutFoodPartner
 }
