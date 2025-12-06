@@ -3,6 +3,7 @@ const userModel = require("../models/user.model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
+// registering a new user
 async function registerUser(req,res){
     
     const {fullName,email,password} = req.body;
@@ -45,6 +46,7 @@ async function registerUser(req,res){
     })
 }
 
+// Login related code
 async function loginUser(req,res){
 
     const {email,password} = req.body;
@@ -87,6 +89,17 @@ async function loginUser(req,res){
     })
 
 }
+
+// user Loging out code
+async function logoutUser(req,res){
+    // clear token from cookie
+    res.clearCookie("token");
+
+    res.status(200).json({
+        message: "user logged out successfully"
+    })
+
+}
 // if we have more controllers/function we cant just send it like below it will consider the last one only
 // modules.export = registerUser
 // module.exports = loginUser
@@ -95,5 +108,6 @@ async function loginUser(req,res){
 
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 }

@@ -20,6 +20,5 @@ app.get("/",(req,res)=>{
 app.use('/api/auth',authRoutes);
 // '/api/auth' -> prefix and authRoutes--user/register
 // combinely -- localhost:3000/api/auth/user/register   -- to access the register route
-app.use('/api/auth',authRoutes)
 
 module.exports = app;
