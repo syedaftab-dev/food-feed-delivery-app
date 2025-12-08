@@ -1,15 +1,19 @@
 import React from 'react'
 import {BrowserRouter as Router,Route, Routes} from 'react-router-dom'
+import FoodPartnerRegister from '../pages/auth/FoodPartnerRegister'
+import UserRegister from "../pages/auth/UserRegister"
+import UserLogin from '../pages/auth/UserLogin'
+import FoodPartnerLogin from '../pages/auth/FoodPartnerLogin'
 
 const AppRoutes = () => {
   return (
     <div>
          <Router>
             <Routes>
-                <Route path="/user/register" element={<h1>User Register Form</h1>}/>
-                <Route path="/user/login" element={<h1>User Login Form</h1>}/>
-                <Route path="/food-partner/register" element={<h1>Food partner Register Form</h1>}/>
-                <Route path="/food-partner/login" element={<h1>Food partner login</h1>}/>
+                <Route path="/user/register" element={<UserRegister/>}/>
+                <Route path="/user/login" element={<UserLogin/>}/>
+                <Route path="/food-partner/register" element={<FoodPartnerRegister/>}/>
+                <Route path="/food-partner/login" element={<FoodPartnerLogin/>}/>
             </Routes>
          </Router>
     </div>

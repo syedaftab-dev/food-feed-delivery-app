@@ -45,6 +45,7 @@ Installing neccessary libraries for frontend
 
 ## refer imagekit docs github for usage
     1. npm install imagekit -- install imagekit libraries
+    2.  npm i axios  -- for calling apis,here we are calling backedn server from frontend to send data like user login/register form
 
 ## POSTMAN
     To test API's and Development
