@@ -1,6 +1,6 @@
 ## Reels Style Video Feed Integration Wesite :
 
-Backend folder
+## Backend folder
 
 
 - Step 1- intializing and important modules
@@ -25,7 +25,15 @@ Backend folder
     3. routes -- we will create all neccessary routes here
     4. controllers --- it contains the main logic of routes created in routes table
         
-# Cloud Storage Provider
+## Frontend Folder
+
+- Step 1- 
+Installing neccessary libraries for frontend
+
+    1. npm create vite@latest   -- for react setup
+    2. npm i react-router-dom   - for routing
+
+## Cloud Storage Provider
  give memory for us to upload files ex: Google Drive,OneDrive etc
 
     here we are using "imagekit.io"
@@ -35,8 +43,8 @@ Backend folder
         ii. public_key
         iii.Url
 
-refer imagekit docs github for usage
-    1. npm install imagekit 
+## refer imagekit docs github for usage
+    1. npm install imagekit -- install imagekit libraries
 
-# POSTMAN
+## POSTMAN
     To test API's and Development

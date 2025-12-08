@@ -108,7 +108,7 @@ async function logoutUser(req,res){
 
 // Register a new food partner 
 async function registerFoodPartner(req,res){
-    const {name,email,password} = req.body;
+    const {name,email,password,phone,address,contactName} = req.body;
 
     // check if it already exist
     const isFoodPartnerAlreadyExists = await foodPartnerModel.findOne({
@@ -128,7 +128,10 @@ async function registerFoodPartner(req,res){
     const foodPartner = await foodPartnerModel.create({
         name,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        phone,
+        address,
+        contactName
     });
 
     // generate token for new food partner
@@ -145,7 +148,10 @@ async function registerFoodPartner(req,res){
         foodPartner: {
             _id: foodPartner._id,
             name: foodPartner.name,
-            email: foodPartner.email
+            email: foodPartner.email,
+            address: foodPartner.address,
+            contactName: foodPartner.contactName,
+            phone: foodPartner.phone
         }
     })
 }

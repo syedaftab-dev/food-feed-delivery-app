@@ -1,0 +1,12 @@
+WHAT Routes we will create here?
+   1. /user/register  -> user register form
+   2. /user/login   -> user login form
+    /food-partner/register   -> food-partner register form
+    /food-partner/login   -> food-partner login form
+
+
+******************PROMPTS********************
+
+1. Login and register form for user and food partner
+Prompt : 
+   create register and login paage for the user and food-patner,use same css file in all the four pages,use css variables for centralize theme create variables in seperate css file.i want the UI design simple,minimal and seamless with light and dark features according to system settings.no need to write the logics like onSubmit just create the UI
