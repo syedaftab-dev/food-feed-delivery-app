@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/auth-shared.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const FoodPartnerLogin = () => {
 
@@ -9,8 +10,23 @@ const FoodPartnerLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
+ 
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+    
+        const response = axios.post("http://localhost:3000/api/auth/food-partner/login", {
+          email,
+          password,
+        },{
+          withCredentials: true
+        }
+      ).then(response=>{
+        console.log(response.data);
+        navigate("/create-food")
+      }).
+      catch(err=>{
+        console.error("there was an error in login!");
+      })
   };
 
   return (

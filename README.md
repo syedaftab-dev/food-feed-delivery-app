@@ -13,6 +13,7 @@
     7. npm i dotenv  -- to use process.env.variable_name 
     8.  npm i multer  -- express server cant read files from frontend like video,images for this we use this middleware
     9. npm i uuid -- to use uuid  - ie unique id for fileName
+    10. npm i cors -- to fix or overcome CORS policy of browsers
 
 - Step 2-
     Connecting to Database-MongoDB
