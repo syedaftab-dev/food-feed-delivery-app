@@ -1,6 +1,8 @@
 const foodPartnerModel = require("../models/foodpartner.model")
+const userModel = require("../models/user.model")
 const jwt=require("jsonwebtoken")
 
+// 1. MIDDLEWARE for FOODPARTNER for PROTECTTION OF HIS API
 // jab food-partner register/login kartha tho token cookie main save hotha usse read karne ke waaste middleware user kare the express.json
 // par wo fir bhi server read nhi kar patha isliye ya hum middle ware banare
 
@@ -45,7 +47,37 @@ async function authFoodPartnerMiddleware(req,res,next){
     }
 }
 
+// 2. MIDDLEWARE FOR USERS API TO GET FOOD VIDEOS ADDED BY FOODPARTNER
+
+async function authUserMiddleware(req,res,next){
+
+    const token = req.cookies.token;
+
+    if(!token){
+        return res.status(401).json({
+            message: "Please Login First"
+        })
+    }
+
+    try{
+        const decoded = jwt.verify(token,process.env.JWT_SECRET);
+
+        const user = await userModel.findById(decoded.id);
+
+        req.user = user;
+
+        next();
+
+    }catch(err){
+        return res.status(401).json({
+            message: "Invalid Token"
+        })
+    }
+    
+}
+
 // isse hun food.controller.js main karinge
 module.exports = {
-    authFoodPartnerMiddleware
+    authFoodPartnerMiddleware,
+    authUserMiddleware
 };

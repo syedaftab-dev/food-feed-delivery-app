@@ -23,7 +23,10 @@ router.post('/',authMiddleware.authFoodPartnerMiddleware,upload.single("video"),
 // ****(zaruri bath)****** -> jab bhi upar wali route chalegi tho controll pahele authMiddleware.authFoodPartnerMiddleware pe jatha waha token hai ya nai check hotha aur ek property "foodPartner" banithi wo foodController.createFood ku milthe
 // creatFood file main hum "foodPartner" ko access kar sakthe
 
+
 // api/food/ [protected] -> users
+// to get videos of food items for the user
+router.get("/",authMiddleware.authUserMiddleware,foodController.getFoodItems)
 
 
 module.exports = router; 
