@@ -28,5 +28,15 @@ router.post('/',authMiddleware.authFoodPartnerMiddleware,upload.single("video"),
 // to get videos of food items for the user
 router.get("/",authMiddleware.authUserMiddleware,foodController.getFoodItems)
 
+// api for likes count and update
+router.post('/like',authMiddleware.authUserMiddleware,foodController.likeFood)
+
+// api to save likes
+router.post('/save',authMiddleware.authUserMiddleware,foodController.saveFood)  
+
+router.get('/save',
+    authMiddleware.authUserMiddleware,
+    foodController.getSaveFood
+)
 
 module.exports = router; 
