@@ -1,42 +1,44 @@
-const express = require("express")
-const router = express.Router();
+const express = require('express');
 const foodController = require("../controllers/food.controller")
 const authMiddleware = require("../middlewares/auth.middleware")
-const multer = require("multer")
+const router = express.Router();
+const multer = require('multer');
 
-// 
+
 const upload = multer({
     storage: multer.memoryStorage(),
 })
 
 
-// iska logic food.controller.js main hai
-// *******ADD FOOD ITEM*************
-
-// api will be /api/food/ [protected]-> onlyy accessed by foodPartner not by users
-// for protection - iskeliye middleware use karna - auth.middleware.js main hai
-
-//                  protection                              food item added logic
-router.post('/',authMiddleware.authFoodPartnerMiddleware,upload.single("video"),foodController.createFood); 
-// video ki jagah kuch bhi dek=sakthe lekin forntend main bhi same dena yaad rakhna
-
-// ****(zaruri bath)****** -> jab bhi upar wali route chalegi tho controll pahele authMiddleware.authFoodPartnerMiddleware pe jatha waha token hai ya nai check hotha aur ek property "foodPartner" banithi wo foodController.createFood ku milthe
-// creatFood file main hum "foodPartner" ko access kar sakthe
+/* POST /api/food/ [protected]*/
+router.post('/',
+    authMiddleware.authFoodPartnerMiddleware,
+    upload.single("mama"),
+    foodController.createFood)
 
 
-// api/food/ [protected] -> users
-// to get videos of food items for the user
-router.get("/",authMiddleware.authUserMiddleware,foodController.getFoodItems)
+/* GET /api/food/ [protected] */
+router.get("/",
+    authMiddleware.authUserMiddleware,
+    foodController.getFoodItems)
 
-// api for likes count and update
-router.post('/like',authMiddleware.authUserMiddleware,foodController.likeFood)
 
-// api to save likes
-router.post('/save',authMiddleware.authUserMiddleware,foodController.saveFood)  
+router.post('/like',
+    authMiddleware.authUserMiddleware,
+    foodController.likeFood)
+
+
+router.post('/save',
+    authMiddleware.authUserMiddleware,
+    foodController.saveFood
+)
+
 
 router.get('/save',
     authMiddleware.authUserMiddleware,
     foodController.getSaveFood
 )
 
-module.exports = router; 
+
+
+module.exports = router

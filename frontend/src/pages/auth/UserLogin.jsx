@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../../styles/auth-shared.css';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const UserLogin = () => {
 
@@ -11,19 +10,18 @@ const UserLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    const response = await axios.post("http://localhost:3000/api/auth/user/login",{
+    const response = await axios.post("http://localhost:3000/api/auth/user/login", {
       email,
       password
-    },{
-       withCredentials: true
-    })
+    }, { withCredentials: true });
 
-    console.log(response.data)
-    navigate("/")
+    console.log(response.data);
+
+    navigate("/"); // Redirect to home after login
+
   };
 
   return (

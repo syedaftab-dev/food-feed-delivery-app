@@ -1,20 +1,18 @@
-// connect image kit code available on their docs
-const ImageKit = require("imagekit")
+const ImageKit = require("imagekit");
 
 const imagekit = new ImageKit({
-    publicKey : process.env.IMAGEKIT_PUBLIC_KEY,
+    publicKey: process.env.IMAGEKIT_PUBLIC_KEY,
     privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
     urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT
-})
+});
 
-async function uploadFile(file,fileName){
+async function uploadFile(file, fileName) {
     const result = await imagekit.upload({
         file: file, // required
-        // multer ek buffer create jartha wahi hai ye
-        fileName: fileName, // requireed
+        fileName: fileName, // required
     })
 
-    return result;
+    return result; // Return the URL of the uploaded file
 }
 
 module.exports = {

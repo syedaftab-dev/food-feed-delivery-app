@@ -1,26 +1,22 @@
-// foood item Schema or Schema of food item added by foodPartner
+const mongoose = require('mongoose');
 
-const mongoose = require("mongoose");
-
-const foodItemSchema = new mongoose.Schema({
+const foodSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
     },
-    video:{
-        type: String, // url of video
+    video: {
+        type: String,
         required: true,
-    }
-    ,
-    description:{
+    },
+    description: {
         type: String,
     },
-    // which foodpartner has added and we need reference to foodPartner collection
-    foodPartner:{
+    foodPartner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "foodpartner",
+        ref: "foodpartner"
     },
-    likeCount:{
+    likeCount: {
         type: Number,
         default: 0
     },
@@ -30,6 +26,8 @@ const foodItemSchema = new mongoose.Schema({
     }
 })
 
-const foodModel = mongoose.model("food",foodItemSchema);
+
+const foodModel = mongoose.model("food", foodSchema);
+
 
 module.exports = foodModel;

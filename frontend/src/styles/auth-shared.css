@@ -68,7 +68,6 @@ form.auth-form { display: flex; flex-direction: column; gap: var(--space-4); }
   transition: border-color var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
   width: 100%;
   min-width: 0; /* allow shrinking inside flex parent */
-  box-sizing: border-box; /* Ensures padding and border are included in the width */
 }
 
 .field-group input:focus-visible {

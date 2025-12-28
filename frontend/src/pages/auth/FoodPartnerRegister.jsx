@@ -1,41 +1,38 @@
 import React from 'react';
-import '../../styles/auth-shared.css';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import '../../styles/auth-shared.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const FoodPartnerRegister = () => {
 
   const navigate = useNavigate();
-
+  
   const handleSubmit = (e) => { 
     e.preventDefault();
 
+    const businessName = e.target.businessName.value;
+    const contactName = e.target.contactName.value;
+    const phone = e.target.phone.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const address = e.target.address.value;
 
-        const businessName = e.target.businessName.value;
-        const contactName = e.target.contactName.value;
-        const phone = e.target.phone.value;
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        const address = e.target.address.value;
-    
-        const response = axios.post("http://localhost:3000/api/auth/food-partner/register", {
-          name:businessName,
-          contactName,
-          phone,
-          email,
-          password,
-          address
-        },{
-          withCredentials: true
-        }
-      ).then(response=>{
+    axios.post("http://localhost:3000/api/auth/food-partner/register", {
+      name:businessName,
+      contactName,
+      phone,
+      email,
+      password,
+      address
+    }, { withCredentials: true })
+      .then(response => {
         console.log(response.data);
-        navigate("/create-food")
-      }).
-      catch(err=>{
-        console.err("there was an error in registering!",err);
+        navigate("/create-food"); // Redirect to create food page after successful registration
       })
+      .catch(error => {
+        console.error("There was an error registering!", error);
+      });
   };
 
   return (

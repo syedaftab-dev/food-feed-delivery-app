@@ -4,16 +4,13 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const Profile = () => {
-    const { id } = useParams() // ise link ka kuch bhi hissa nikal sakthe
-    const [ profile, setProfile ] = useState(null) // profiles of foodPartner
-    const [ videos, setVideos ] = useState([]) // videos of foodPartner are stored here before rendering
+    const { id } = useParams()
+    const [ profile, setProfile ] = useState(null)
+    const [ videos, setVideos ] = useState([])
 
-    // is api par videos milenge foodPartner ke id ke hisab se 
-    // iise leke hum profile page pe render karre
     useEffect(() => {
         axios.get(`http://localhost:3000/api/food-partner/${id}`, { withCredentials: true })
             .then(response => {
-                // get the video from DB and save here to render
                 setProfile(response.data.foodPartner)
                 setVideos(response.data.foodPartner.foodItems)
             })

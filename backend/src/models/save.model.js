@@ -1,9 +1,10 @@
-const mongoose =require("mongoose")
+const mongoose = require('mongoose');
+
 
 const saveSchema = new mongoose.Schema({
-    user:{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user",
+        ref: 'user',
         required: true
     },
     food: {
@@ -11,10 +12,11 @@ const saveSchema = new mongoose.Schema({
         ref: 'food',
         required: true
     }
-},{
+}, {
     timestamps: true
 })
 
-const saveModel = mongoose.model('save',saveSchema)
+
+const saveModel = mongoose.model('save', saveSchema);
 
 module.exports = saveModel;
