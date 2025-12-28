@@ -1,37 +1,8 @@
 import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { NavLink } from 'react-router-dom'
 import '../styles/bottom-nav.css'
 
 const BottomNav = () => {
-  const navigate = useNavigate()
-
-  const handleLogout = async () => {
-    try {
-      const response = await axios.post('http://localhost:3000/api/auth/user/logout', 
-        {},
-        { 
-          withCredentials: true,
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-      );
-      
-      if (response.status === 200) {
-        // Clear any client-side auth state if needed
-        localStorage.removeItem('isAuthenticated');
-        
-        // Force a full page reload to ensure all state is cleared
-        window.location.href = '/user/login';
-      }
-    } catch (error) {
-      console.error('Logout failed:', error);
-      // Even if there's an error, still redirect to login
-      window.location.href = '/user/login';
-    }
-  }
   return (
     <nav className="bottom-nav" role="navigation" aria-label="Bottom">
       <div className="bottom-nav__inner">
@@ -55,21 +26,6 @@ const BottomNav = () => {
           </span>
           <span className="bottom-nav__label">Saved</span>
         </NavLink>
-
-        <button 
-          onClick={handleLogout}
-          className="bottom-nav__item"
-          aria-label="Logout"
-        >
-          <span className="bottom-nav__icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-              <polyline points="16 17 21 12 16 7"/>
-              <line x1="21" y1="12" x2="9" y2="12"/>
-            </svg>
-          </span>
-          <span className="bottom-nav__label">Logout</span>
-        </button>
       </div>
     </nav>
   )
