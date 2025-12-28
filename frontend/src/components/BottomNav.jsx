@@ -26,6 +26,17 @@ const BottomNav = () => {
           </span>
           <span className="bottom-nav__label">Saved</span>
         </NavLink>
+
+        <NavLink to="/user/logout" className={({ isActive }) => `bottom-nav__item ${isActive ? 'is-active' : ''}`}>
+          <span className="bottom-nav__icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <path d="M16 17l5-5-5-5" />
+              <path d="M21 12H9" />
+            </svg>
+          </span>
+          <span className="bottom-nav__label">Logout</span>
+        </NavLink>
       </div>
     </nav>
   )

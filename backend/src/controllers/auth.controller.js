@@ -7,8 +7,16 @@ async function registerUser(req, res) {
 
     const { fullName, email, password } = req.body;
 
+    if (!fullName || !email || !password) {
+        return res.status(400).json({
+            message: "All fields are required"
+        })
+    }
+
+    const normalizedEmail = String(email).trim().toLowerCase();
+
     const isUserAlreadyExists = await userModel.findOne({
-        email
+        email: normalizedEmail
     })
 
     if (isUserAlreadyExists) {
@@ -21,7 +29,7 @@ async function registerUser(req, res) {
 
     const user = await userModel.create({
         fullName,
-        email,
+        email: normalizedEmail,
         password: hashedPassword
     })
 
@@ -46,11 +54,25 @@ async function loginUser(req, res) {
 
     const { email, password } = req.body;
 
+    if (!email || !password) {
+        return res.status(400).json({
+            message: "Email and password are required"
+        })
+    }
+
+    const normalizedEmail = String(email).trim().toLowerCase();
+
     const user = await userModel.findOne({
-        email
+        email: { $regex: `^${normalizedEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, $options: 'i' }
     })
 
     if (!user) {
+        return res.status(400).json({
+            message: "Invalid email or password"
+        })
+    }
+
+    if (!user.password) {
         return res.status(400).json({
             message: "Invalid email or password"
         })
@@ -92,8 +114,16 @@ async function registerFoodPartner(req, res) {
 
     const { name, email, password, phone, address, contactName } = req.body;
 
+    if (!name || !email || !password || !phone || !address || !contactName) {
+        return res.status(400).json({
+            message: "All fields are required"
+        })
+    }
+
+    const normalizedEmail = String(email).trim().toLowerCase();
+
     const isAccountAlreadyExists = await foodPartnerModel.findOne({
-        email
+        email: normalizedEmail
     })
 
     if (isAccountAlreadyExists) {
@@ -106,7 +136,7 @@ async function registerFoodPartner(req, res) {
 
     const foodPartner = await foodPartnerModel.create({
         name,
-        email,
+        email: normalizedEmail,
         password: hashedPassword,
         phone,
         address,
@@ -137,11 +167,25 @@ async function loginFoodPartner(req, res) {
 
     const { email, password } = req.body;
 
+    if (!email || !password) {
+        return res.status(400).json({
+            message: "Email and password are required"
+        })
+    }
+
+    const normalizedEmail = String(email).trim().toLowerCase();
+
     const foodPartner = await foodPartnerModel.findOne({
-        email
+        email: { $regex: `^${normalizedEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, $options: 'i' }
     })
 
     if (!foodPartner) {
+        return res.status(400).json({
+            message: "Invalid email or password"
+        })
+    }
+
+    if (!foodPartner.password) {
         return res.status(400).json({
             message: "Invalid email or password"
         })

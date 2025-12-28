@@ -1,52 +1,122 @@
-## Reels Style Video Feed Integration Wesite :
+# Reel Food Delivery App
 
-## Backend folder
+A modern food delivery concept connecting food lovers with local food partners, featuring food video in reels style and order food through it and a seamless user experience.
+
+## Screenshots
+
+### User Facing
+- **Home Page**  
+    ![alt text](<screenshots/home page.JPG>)
+- **User Login**  
+    ![alt text](screenshots/login.JPG)
+- **User Registration**  
+    ![alt text](screenshots/user-register.JPG)
 
 
-- Step 1- intializing and important modules
-    1. npm init -y      ---     initiating project 
-    2. npm i express    ---  for express lib
-    3. make server.js and app.js files
-    4. npx nodemon server.js   ----  to run the server also updates modified changes in the server by restrating it automatically
-    5. npm i bcryptjs  --- to hash passwords
-    6. npm i jsonwebtoken cookie-parser  --- to create token for user and cookie-parser if the already register user logins back
-    7. npm i dotenv  -- to use process.env.variable_name 
-    8.  npm i multer  -- express server cant read files from frontend like video,images for this we use this middleware
-    9. npm i uuid -- to use uuid  - ie unique id for fileName
-    10. npm i cors -- to fix or overcome CORS policy of browsers
+### Food Partner Facing
+- **Partner Login**  
+    ![alt text](screenshots/food-partner-login.JPG)
+- **Partner Registration**  
+    ![alt text](screenshots/food-partner-register.JPG)
+- **Create Food**   
+    ![alt text](<screenshots/create food.JPG>)
+- **Food partner profile**  
+    ![alt text](screenshots/food-partner-profile.JPG)
 
-- Step 2-
-    Connecting to Database-MongoDB
-    1. npm i mongoose -- for mongoDB database thing
-    2. Make a folder db inside src and a file name db.js
-- Step 3-
-    Folders
-    1. models  --- schema of different collections of database
-    2. db -- for Database things,like connecting etc
-    3. routes -- we will create all neccessary routes here
-    4. controllers --- it contains the main logic of routes created in routes table
-        
-## Frontend Folder
+## Features
 
-- Step 1- 
-Installing neccessary libraries for frontend
+- User authentication (register/login/logout)
+- Food partner dashboard
+- Save favorite food items
+- Mobile-responsive design
+- Like and comment functionality
 
-    1. npm create vite@latest   -- for react setup
-    2. npm i react-router-dom   - for routing
+## Tech Stack
 
-## Cloud Storage Provider
- give memory for us to upload files ex: Google Drive,OneDrive etc
+- **Frontend**: React.js, React Router, CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **Storage**: ImageKit for image/video hosting
 
-    here we are using "imagekit.io"
-    1. it provide string for files to access them
-    2. 3 things are important and keep them private and secure
-        i.  private_key
-        ii. public_key
-        iii.Url
+## Getting Started
 
-## refer imagekit docs github for usage
-    1. npm install imagekit -- install imagekit libraries
-    2.  npm i axios  -- for calling apis,here we are calling backedn server from frontend to send data like user login/register form
+### Prerequisites
+- Node.js (v16+)
+- MongoDB
+- npm or yarn
 
-## POSTMAN
-    To test API's and Development
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   # Install backend dependencies
+   cd backend
+   npm install
+   
+   # Install frontend dependencies
+   cd ../frontend
+   npm install
+   ```
+
+3. Set up environment variables (create .env files in both frontend and backend)
+
+4. Start the development servers:
+   ```bash
+   # Start backend
+   cd backend
+   npm run dev
+   
+   # In a new terminal
+   cd frontend
+   npm run dev
+   ```
+
+## Environment Variables
+
+### Backend (.env)
+```
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+IMAGEKIT_PUBLIC_KEY=your_imagekit_public_key
+IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
+IMAGEKIT_URL_ENDPOINT=your_imagekit_url_endpoint
+```
+
+## Project Structure
+
+```
+Reel-Food-Delivery-app/
+├── backend/           # Backend server code
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   └── middlewares/
+│   └── server.js
+├── frontend/          # Frontend React app
+│   ├── public/
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       ├── routes/
+│       └── styles/
+└── screenshots/       # Screenshots for documentation
+```
+
+## Note for Recruiters
+
+This project demonstrates my full-stack development skills with the MERN stack. Key highlights:
+- Implemented secure authentication with JWT
+- Built responsive UIs with React and TailwindCSS
+- Integrated third-party services (ImageKit)
+- Followed RESTful API design principles
+- Wrote clean, maintainable code with proper error handling
+
+The application is designed to be scalable and maintainable, with a clear separation of concerns between the frontend and backend.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+

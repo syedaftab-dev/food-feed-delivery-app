@@ -72,7 +72,10 @@ const CreateFood = () => {
         <div className="create-food-page">
             <div className="create-food-card">
                 <header className="create-food-header">
-                    <h1 className="create-food-title">Create Food</h1>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+                        <h1 className="create-food-title">Create Food</h1>
+                        <button type="button" className="btn-ghost danger" onClick={() => navigate('/food-partner/logout')}>Logout</button>
+                    </div>
                     <p className="create-food-subtitle">Upload a short video, give it a name, and add a description.</p>
                 </header>
 

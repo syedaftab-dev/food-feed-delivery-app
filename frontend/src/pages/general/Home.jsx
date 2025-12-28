@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import '../../styles/reels.css'
 import ReelFeed from '../../components/ReelFeed'
@@ -6,17 +7,43 @@ import ReelFeed from '../../components/ReelFeed'
 const Home = () => {
     const [ videos, setVideos ] = useState([])
     // Autoplay behavior is handled inside ReelFeed
+    const navigate = useNavigate()
 
     useEffect(() => {
+        console.log('Fetching food items...');
         axios.get("http://localhost:3000/api/food", { withCredentials: true })
             .then(response => {
-
-                console.log(response.data);
-
-                setVideos(response.data.foodItems)
+                console.log('API Response:', response);
+                console.log('Response data:', response.data);
+                
+                if (response.data && response.data.foodItems) {
+                    console.log('Number of food items received:', response.data.foodItems.length);
+                    setVideos(response.data.foodItems);
+                } else {
+                    console.error('Unexpected response format:', response.data);
+                }
             })
-            .catch(() => { /* noop: optionally handle error */ })
-    }, [])
+            .catch(error => {
+                console.error('Error fetching food items:', error);
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.error('Error response data:', error.response.data);
+                    console.error('Error status:', error.response.status);
+                    console.error('Error headers:', error.response.headers);
+
+                    if (error.response.status === 401) {
+                        navigate('/user/login')
+                    }
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.error('No response received:', error.request);
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.error('Error message:', error.message);
+                }
+            });
+    }, [ navigate ])
 
     // Using local refs within ReelFeed; keeping map here for dependency parity if needed
 

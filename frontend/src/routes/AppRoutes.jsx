@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import UserRegister from '../pages/auth/UserRegister';
 import ChooseRegister from '../pages/auth/ChooseRegister';
 import UserLogin from '../pages/auth/UserLogin';
+import UserLogout from '../pages/auth/UserLogout';
 import FoodPartnerRegister from '../pages/auth/FoodPartnerRegister';
 import FoodPartnerLogin from '../pages/auth/FoodPartnerLogin';
+import FoodPartnerLogout from '../pages/auth/FoodPartnerLogout';
 import Home from '../pages/general/Home';
 import Saved from '../pages/general/Saved';
 import BottomNav from '../components/BottomNav';
@@ -18,8 +20,10 @@ const AppRoutes = () => {
                 <Route path="/register" element={<ChooseRegister />} />
                 <Route path="/user/register" element={<UserRegister />} />
                 <Route path="/user/login" element={<UserLogin />} />
+                <Route path="/user/logout" element={<UserLogout />} />
                 <Route path="/food-partner/register" element={<FoodPartnerRegister />} />
                 <Route path="/food-partner/login" element={<FoodPartnerLogin />} />
+                <Route path="/food-partner/logout" element={<FoodPartnerLogout />} />
                 <Route path="/" element={<><Home /><BottomNav /></>} />
                 <Route path="/saved" element={<><Saved /><BottomNav /></>} />
                 <Route path="/create-food" element={<CreateFood />} />
